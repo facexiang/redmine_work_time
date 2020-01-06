@@ -170,3 +170,42 @@ function sumDayTimes() {
   document.getElementById("currentTotal").style = 'color:#FF0000;';
   return true;
 }
+
+$(document).ready(function() {
+  $('input[name="change_entry"]').on('blur', function() {
+    var val = parseFloat($(this).val());
+    var org_val = parseFloat($(this).data('vl'));
+    if (val == org_val){
+      return false;
+    }
+    if (!val > 0 || val === 0){
+      alert('工时必须大于 0 !');
+      $(this).val(org_val);
+      return false;
+    }
+    if (val > 24){
+      alert('工时必须小于 24 !');
+      $(this).val(org_val);
+      return false;
+    }
+    var res = confirm("确定提交？");
+    if (res == true) {
+      $input = $(this);
+      data = {
+        prj: $(this).data('prj'),
+        val: val
+      };
+      $.post("/work_time_entry/change", data,
+        function(data){
+          if (data.stat == 'ok'){
+            //$input.attr('data-vl', val);
+            window.location.reload();
+          }else{
+            $input.val(org_val);
+            alert(data.msg);
+          }
+        }
+      ), 'json';
+    }
+  });
+});

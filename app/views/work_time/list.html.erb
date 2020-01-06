@@ -1,0 +1,27 @@
+<%=javascript_include_tag "work_time", :plugin=>'redmine_work_time' %>
+<%=stylesheet_link_tag 'work_time', :plugin => 'redmine_work_time' %>
+
+<%= @message.html_safe %>
+
+<%= render :partial=>'user_month_table_simple' %>
+
+<br/>
+<hr/>
+
+<!--
+<%#= form_tag @link_params do %>
+  <h2>
+    <%#=l(:wt_daily_report)%>
+    <%#=@this_date.strftime("%Y-%m-%d")%>
+  </h2>
+
+  <%#= hidden_field_tag('year', @this_date.year) %>
+  <%#= hidden_field_tag('month', @this_date.month) %>
+  <%#= hidden_field_tag('day', @this_date.day) %>
+  <%#= hidden_field_tag('user', @this_uid) %>
+  <%#= hidden_field_tag('prj', @restrict_project) %>
+
+  <%#= render :partial=>'user_day_table' %>
+
+<%#end%>
+-->
